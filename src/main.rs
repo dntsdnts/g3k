@@ -112,7 +112,7 @@ fn main() -> Result<()> {
 			loop {
 				let mut builder = Builder::new(&args.uid);
 				let mut backflow: usize = 0;
-				while backflow < args.max_backflow {
+                while backflow <= args.max_backflow {
 					builder.backflow();
 					builder.gen()?;
 					let fp = builder.fingerprint()?;
