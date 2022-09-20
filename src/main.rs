@@ -39,6 +39,9 @@ struct CliArgs {
 	/// desired fingerprint / Key ID suffix
 	#[argh(positional)]
 	suffix: String,
+    /// verbose
+    #[argh(switch, short='v')]
+    verbose: bool,
 }
 
 #[derive(Clone)]
@@ -113,6 +116,9 @@ fn main() -> Result<()> {
 					builder.backflow();
 					builder.gen()?;
 					let fp = builder.fingerprint()?;
+                    if args.verbose { 
+                        eprint!("{:?}", fp); 
+                    }
 					if fp.ends_with(&suffix) {
 						sender.send((builder.clone(), iterations))?;
 					}
